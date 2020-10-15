@@ -41,13 +41,13 @@ type Point3D = [Float; 3];
 /// let P6 = [23.691, 9.935, 28.389]; // CD1
 /// let P7 = [22.557, 9.096, 30.459]; // CD2
 ///
-/// assert!((dihedral([P0, P1, P2, P3]).to_degrees() - (-71.21515)).abs() < 1E-2);
-/// assert!((dihedral([P0, P1, P4, P5]).to_degrees() - (-171.94319)).abs() < 1E-2);
-/// assert!((dihedral([P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
-/// assert!((dihedral([P1, P4, P5, P7]).to_degrees() - (-177.63641)).abs() < 1E-2);
+/// assert!((dihedral(&[P0, P1, P2, P3]).to_degrees() - (-71.21515)).abs() < 1E-2);
+/// assert!((dihedral(&[P0, P1, P4, P5]).to_degrees() - (-171.94319)).abs() < 1E-2);
+/// assert!((dihedral(&[P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
+/// assert!((dihedral(&[P1, P4, P5, P7]).to_degrees() - (-177.63641)).abs() < 1E-2);
 /// ```
 #[inline]
-pub fn dihedral([a, b, c, d]: [Point3D; 4]) -> Float {
+pub fn dihedral(&[a, b, c, d]: &[Point3D; 4]) -> Float {
     let (a, b, c) = (v(a, b), v(b, c), v(c, d));
     let (r, s) = (u(cross(a, b)), u(cross(b, c)));
     let t = cross(r, u(b));
@@ -71,13 +71,13 @@ pub fn dihedral([a, b, c, d]: [Point3D; 4]) -> Float {
 /// let P6 = [23.691, 9.935, 28.389]; // CD1
 /// let P7 = [22.557, 9.096, 30.459]; // CD2
 ///
-/// assert!((dihedral_unsigned([P0, P1, P2, P3]).to_degrees() - (71.21515)).abs() < 1E-2);
-/// assert!((dihedral_unsigned([P0, P1, P4, P5]).to_degrees() - (171.94319)).abs() < 1E-2);
-/// assert!((dihedral_unsigned([P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
-/// assert!((dihedral_unsigned([P1, P4, P5, P7]).to_degrees() - (177.63641)).abs() < 1E-2);
+/// assert!((dihedral_unsigned(&[P0, P1, P2, P3]).to_degrees() - (71.21515)).abs() < 1E-2);
+/// assert!((dihedral_unsigned(&[P0, P1, P4, P5]).to_degrees() - (171.94319)).abs() < 1E-2);
+/// assert!((dihedral_unsigned(&[P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
+/// assert!((dihedral_unsigned(&[P1, P4, P5, P7]).to_degrees() - (177.63641)).abs() < 1E-2);
 /// ```
 #[inline]
-pub fn dihedral_unsigned([a, b, c, d]: [Point3D; 4]) -> Float {
+pub fn dihedral_unsigned(&[a, b, c, d]: &[Point3D; 4]) -> Float {
     let (a, b, c) = (v(a, b), v(b, c), v(c, d));
     let (r, s) = (cross(a, b), cross(b, c));
     (dot(r, s) / (norm(r) * norm(s))).acos()
@@ -134,18 +134,18 @@ mod tests {
 
     #[test]
     fn test_dihedral() {
-        assert!((dihedral([P0, P1, P2, P3]).to_degrees() - (-71.21515)).abs() < 1E-2);
-        assert!((dihedral([P0, P1, P4, P5]).to_degrees() - (-171.94319)).abs() < 1E-2);
-        assert!((dihedral([P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
-        assert!((dihedral([P1, P4, P5, P7]).to_degrees() - (-177.63641)).abs() < 1E-2);
+        assert!((dihedral(&[P0, P1, P2, P3]).to_degrees() - (-71.21515)).abs() < 1E-2);
+        assert!((dihedral(&[P0, P1, P4, P5]).to_degrees() - (-171.94319)).abs() < 1E-2);
+        assert!((dihedral(&[P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
+        assert!((dihedral(&[P1, P4, P5, P7]).to_degrees() - (-177.63641)).abs() < 1E-2);
     }
 
     #[test]
     fn test_dihedral_unsigned() {
-        println!("{}", dihedral_unsigned([P0, P1, P4, P5]).to_degrees());
-        assert!((dihedral_unsigned([P0, P1, P2, P3]).to_degrees() - (71.21515)).abs() < 1E-2);
-        assert!((dihedral_unsigned([P0, P1, P4, P5]).to_degrees() - (171.94319)).abs() < 1E-2);
-        assert!((dihedral_unsigned([P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
-        assert!((dihedral_unsigned([P1, P4, P5, P7]).to_degrees() - (177.63641)).abs() < 1E-2);
+        println!("{}", dihedral_unsigned(&[P0, P1, P4, P5]).to_degrees());
+        assert!((dihedral_unsigned(&[P0, P1, P2, P3]).to_degrees() - (71.21515)).abs() < 1E-2);
+        assert!((dihedral_unsigned(&[P0, P1, P4, P5]).to_degrees() - (171.94319)).abs() < 1E-2);
+        assert!((dihedral_unsigned(&[P1, P4, P5, P6]).to_degrees() - (60.82226)).abs() < 1E-2);
+        assert!((dihedral_unsigned(&[P1, P4, P5, P7]).to_degrees() - (177.63641)).abs() < 1E-2);
     }
 }
