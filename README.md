@@ -1,5 +1,9 @@
 # dihedral
 
+[![crates.io](https://img.shields.io/crates/d/dihedral.svg)](https://crates.io/crates/dihedral)
+[![crates.io](https://img.shields.io/crates/v/dihedral.svg)](https://crates.io/crates/dihedral)
+[![crates.io](https://img.shields.io/crates/l/dihedral.svg)](https://crates.io/crates/dihedral)
+
 Dihedral angle calculations
 
 This crate provides functions for working with dihedral angles. Currently, there are two functions:
